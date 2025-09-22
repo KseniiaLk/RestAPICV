@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36511.14 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestAPICV", "RestAPICV\RestAPICV.csproj", "{B453ECDC-9930-40A5-9886-CDB1E787D889}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B453ECDC-9930-40A5-9886-CDB1E787D889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B453ECDC-9930-40A5-9886-CDB1E787D889}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B453ECDC-9930-40A5-9886-CDB1E787D889}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B453ECDC-9930-40A5-9886-CDB1E787D889}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A22BF55D-A0EE-42E6-8D97-AEE71A5551B2}
+	EndGlobalSection
+EndGlobal
