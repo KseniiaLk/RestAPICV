@@ -1,0 +1,1 @@
+In this project, I built a backend in ASP.NET Core to manage CV data. The data is stored in a SQL Server database through Entity Framework, and I implemented REST API endpoints to retrieve, add, update, and remove information.
