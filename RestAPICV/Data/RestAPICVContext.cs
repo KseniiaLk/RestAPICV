@@ -13,45 +13,37 @@ namespace RestAPICV.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // PersonalInfo conf
+            // PersonalInfo
             modelBuilder.Entity<PersonalInfo>(entity =>
             {
-                entity.HasKey(e => e.PersonId);
+                entity.HasKey(e => e.Id);
                 entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
-                entity.Property(e => e.Description).HasMaxLength(500);
                 entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
-                entity.Property(e => e.Phone).HasMaxLength(20);
-                entity.Property(e => e.CreatedAt).IsRequired();
             });
 
-            // Education conf
+            // Education
             modelBuilder.Entity<Education>(entity =>
             {
-                entity.HasKey(e => e.EducationId);
+                entity.HasKey(e => e.Id);
                 entity.Property(e => e.SchoolName).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.Degree).IsRequired().HasMaxLength(200);
-                entity.Property(e => e.StartDate).IsRequired();
-                entity.Property(e => e.CreatedAt).IsRequired();
 
-                entity.HasOne(e => e.Person)
+                entity.HasOne(e => e.PersonalInfo)
                       .WithMany(p => p.Educations)
-                      .HasForeignKey(e => e.PersonId)
+                      .HasForeignKey(e => e.PersonalInfoId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
 
-            // WorkExperience conf
+            // WorkExperience
             modelBuilder.Entity<WorkExperience>(entity =>
             {
-                entity.HasKey(e => e.WorkExperienceId);
+                entity.HasKey(e => e.Id);
                 entity.Property(e => e.JobTitle).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.Company).IsRequired().HasMaxLength(200);
-                entity.Property(e => e.Description).HasMaxLength(1000);
-                entity.Property(e => e.Year).IsRequired();
-                entity.Property(e => e.CreatedAt).IsRequired();
 
-                entity.HasOne(e => e.Person)
+                entity.HasOne(e => e.PersonalInfo)
                       .WithMany(p => p.WorkExperiences)
-                      .HasForeignKey(e => e.PersonId)
+                      .HasForeignKey(e => e.PersonalInfoId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
         }

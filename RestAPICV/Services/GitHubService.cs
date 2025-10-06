@@ -1,24 +1,22 @@
 ﻿using RestAPICV.DTOs;
 using System.Text.Json;
 
-namespace RestAPICV.Endpoints
+namespace RestAPICV.Services
 {
-    public static class GitHubEndpoints
+    public class GitHubService
     {
-        public static void RegisterEndpoints(this WebApplication app)
-        {
-            var group = app.MapGroup("/api/github")
-                .WithTags("GitHub")
-                .WithOpenApi();
+        private readonly HttpClient _httpClient;
 
-            group.MapGet("/repositories/{username}", GetGitHubRepositories);
+        public GitHubService(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
         }
 
-        private static async Task<IResult> GetGitHubRepositories(string username, HttpClient httpClient)
+        public async Task<List<GitHubRepositoryDTO>> GetRepositoriesAsync(string username)
         {
             try
             {
-                var response = await httpClient.GetAsync($"https://api.github.com/users/{username}/repos");
+                var response = await _httpClient.GetAsync($"https://api.github.com/users/{username}/repos");
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -29,30 +27,28 @@ namespace RestAPICV.Endpoints
                     });
 
                     if (repositories == null)
-                        return Results.Ok(new List<GitHubRepositoryDTO>());
+                        return new List<GitHubRepositoryDTO>();
 
-                    var result = repositories.Select(repo => new GitHubRepositoryDTO
+                    return repositories.Select(repo => new GitHubRepositoryDTO
                     {
                         Name = repo.Name ?? "Saknas",
                         Language = string.IsNullOrEmpty(repo.Language) ? "okänt" : repo.Language,
                         Description = string.IsNullOrEmpty(repo.Description) ? "saknas" : repo.Description,
                         Url = repo.HtmlUrl ?? "Saknas"
                     }).ToList();
-
-                    return Results.Ok(result);
                 }
                 else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
                 {
-                    return Results.NotFound($"GitHub user '{username}' not found");
+                    throw new Exception($"GitHub user '{username}' not found");
                 }
                 else
                 {
-                    return Results.Problem($"GitHub API returned status: {response.StatusCode}");
+                    throw new Exception($"GitHub API returned status: {response.StatusCode}");
                 }
             }
             catch (Exception ex)
             {
-                return Results.Problem($"Error calling GitHub API: {ex.Message}");
+                throw new Exception($"Error calling GitHub API: {ex.Message}");
             }
         }
     }

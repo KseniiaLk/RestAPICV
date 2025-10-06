@@ -1,4 +1,4 @@
-@RestAPICV_HostAddress = http://localhost:5251
+﻿@RestAPICV_HostAddress = http://localhost:5251
 
 GET {{RestAPICV_HostAddress}}/weatherforecast/
 Accept: application/json

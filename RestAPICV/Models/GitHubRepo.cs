@@ -16,4 +16,4 @@ namespace RestAPICV.Models
         [JsonPropertyName("html_url")]
         public string? HtmlUrl { get; set; }
     }
-}}
+}
