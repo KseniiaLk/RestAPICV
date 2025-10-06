@@ -5,7 +5,6 @@ using RestAPICV.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -24,7 +23,6 @@ builder.Services.AddScoped<GitHubService>();
 
 var app = builder.Build();
 
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -39,4 +37,4 @@ app.RegisterEducationEndpoints();
 app.RegisterWorkExperienceEndpoints();
 app.RegisterGitHubEndpoints();
 
-app.Run(); 
+app.Run();
